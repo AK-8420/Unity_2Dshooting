@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
     Transform bulletSpawn = null;
     [SerializeField]
     AudioSource audioSource = null;
+    [SerializeField]
+    GameManager gameManager = null;  // š’Ç‰Á
 
     [Header("ˆÚ“®İ’è")]
     [SerializeField]
@@ -120,4 +122,12 @@ public class PlayerController : MonoBehaviour
         firing = false;
     }
 
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            gameManager.GameOver();
+            gameObject.SetActive(false);
+        }
+    }
 }
