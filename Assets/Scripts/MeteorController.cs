@@ -5,6 +5,8 @@ public class MeteorController : MonoBehaviour
 
     [SerializeField]
     Rigidbody2D rigidBody = null;
+    [SerializeField]
+    GameObject explosionPrefab = null;   // Åöí«â¡
 
     [Min(1), Space]
     public int hp = 1;
@@ -53,6 +55,7 @@ public class MeteorController : MonoBehaviour
 
         if (hp <= 0)
         {
+            Instantiate(explosionPrefab, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
     }

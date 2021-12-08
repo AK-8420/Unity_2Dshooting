@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
     AudioSource audioSource = null;
     [SerializeField]
     GameManager gameManager = null;  // š’Ç‰Á
+    [SerializeField]
+    GameObject explosionPrefab = null; // š’Ç‰Á‚»‚Ì‚Q
 
     [Header("ˆÚ“®İ’è")]
     [SerializeField]
@@ -126,6 +128,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
+            Instantiate(explosionPrefab, thisTransform.position, Quaternion.identity);
             gameManager.GameOver();
             gameObject.SetActive(false);
         }
