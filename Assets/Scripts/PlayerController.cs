@@ -118,6 +118,8 @@ public class PlayerController : MonoBehaviour
 
         // 弾のゲームオブジェクトを生成
         Instantiate(bulletPrefab, bulletSpawn.position, thisTransform.rotation);
+        // 射撃時の効果音を再生
+        audioSource.PlayOneShot(fireSe);
 
         yield return fireIntervalWait;
 
