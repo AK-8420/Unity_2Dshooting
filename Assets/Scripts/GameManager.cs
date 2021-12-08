@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;  // ★追加
 
 public class GameManager : MonoBehaviour
 {
@@ -11,6 +12,25 @@ public class GameManager : MonoBehaviour
     Canvas gameStartCanvas = null;
     [SerializeField]
     Canvas gameOverCanvas = null;
+    [SerializeField]
+    Text scoreText = null;  // ★追加
+    [SerializeField]
+    Canvas scoreCanvas = null;  // ★追加
+
+    // ★追加
+    int score = 0;
+    public int Score
+    {
+        set
+        {
+            score = Mathf.Clamp(value, 0, 9999999);
+            scoreText.text = score.ToString();
+        }
+        get
+        {
+            return score;
+        }
+    }
 
     void Start()
     {
@@ -19,10 +39,15 @@ public class GameManager : MonoBehaviour
 
         // タイトル画面を表示
         gameStartCanvas.gameObject.SetActive(true);
+
+        Score = 0;
     }
 
     public void GameStart()
     {
+        // スコアをリセットする
+        Score = 0;
+        scoreCanvas.gameObject.SetActive(true);
         // タイトル画面やゲームオーバー画面を非表示
         gameStartCanvas.gameObject.SetActive(false);
         gameOverCanvas.gameObject.SetActive(false);

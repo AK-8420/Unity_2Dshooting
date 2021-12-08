@@ -56,6 +56,7 @@ public class MeteorController : MonoBehaviour
         if (hp <= 0)
         {
             Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+            GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>().Score += score;
             Destroy(gameObject);
         }
     }
