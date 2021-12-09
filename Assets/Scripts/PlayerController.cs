@@ -13,6 +13,10 @@ public class PlayerController : MonoBehaviour
     Transform bulletSpawn = null;
     [SerializeField]
     AudioSource audioSource = null;
+    [SerializeField]
+    GameManager gameManager = null;  // ★追加
+    [SerializeField]
+    GameObject explosionPrefab = null; // ★追加その２
 
     [Header("移動設定")]
     [SerializeField]
@@ -114,10 +118,21 @@ public class PlayerController : MonoBehaviour
 
         // 弾のゲームオブジェクトを生成
         Instantiate(bulletPrefab, bulletSpawn.position, thisTransform.rotation);
+        // 射撃時の効果音を再生
+        audioSource.PlayOneShot(fireSe);
 
         yield return fireIntervalWait;
 
         firing = false;
     }
 
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            Instantiate(explosionPrefab, thisTransform.position, Quaternion.identity);
+            gameManager.GameOver();
+            gameObject.SetActive(false);
+        }
+    }
 }
